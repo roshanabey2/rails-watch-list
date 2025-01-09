@@ -8,14 +8,18 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-genres = [
-  "Action", "Adventure", "Comedy", "Drama", "Fantasy",
-  "Horror", "Mystery", "Romance", "Sci-Fi", "Thriller"
-]
- 10.times do
-  p "Creating Movie List"
-  list = List.new({ name: genres.sample })
-  list.save
-  genres.delete(list.name)
-  p "Created #{list.name} List"
+require "json"
+require "open-uri"
+
+
+
+movie_api = "https://tmdb.lewagon.com/movie/top_rated"
+movies_serialized = URI.parse(movie_api).read
+movies = JSON.parse(movies_serialized)
+
+ movies["results"].each do |movie|
+  p "Creating Movies"
+  new_movie = Movie.new({ title: movie["title"], overview: movie["overview"], poster_url: movie["poster_path"], rating: movie["vote_average"] })
+  new_movie.save
+  p "#{new_movie.title} has been added to the database"
 end
