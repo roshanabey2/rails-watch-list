@@ -65,3 +65,5 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form"
 gem "sassc-rails"
 gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'faker'
+gem 'hirb'

@@ -105,6 +105,8 @@ GEM
     et-orbi (1.2.11)
       tzinfo
     execjs (2.10.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.1-aarch64-linux-gnu)
     ffi (1.17.1-aarch64-linux-musl)
     ffi (1.17.1-arm-linux-gnu)
@@ -120,6 +122,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hirb (0.7.3)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.1.0)
@@ -394,7 +397,9 @@ DEPENDENCIES
   bootstrap (~> 5.2)
   brakeman
   debug
+  faker
   font-awesome-sass (~> 6.1)
+  hirb
   importmap-rails
   jbuilder
   kamal
