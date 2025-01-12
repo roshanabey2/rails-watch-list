@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   before_action :set_list, only: %i[ show edit update destroy ]
 
-  # GET /lists or /lists.json
+  # GET /lists
   def index
     @lists = List.all
   end
@@ -21,9 +21,9 @@ class ListsController < ApplicationController
 
   # POST /lists or /lists.json
   def create
-    @list = List.new(restaurant_params)
-    if @List.save
-      redirect_to list_path(@lists), status: :see_other
+    @list = List.new(list_params)
+    if @list.save
+      redirect_to list_path(@list), status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,25 +31,12 @@ class ListsController < ApplicationController
 
   # PATCH/PUT /lists/1 or /lists/1.json
   def update
-    respond_to do |format|
-      if @list.update(list_params)
-        format.html { redirect_to @list, notice: "List was successfully updated." }
-        format.json { render :show, status: :ok, location: @list }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @list.errors, status: :unprocessable_entity }
-      end
-    end
+    list.update(list_params)
   end
 
   # DELETE /lists/1 or /lists/1.json
   def destroy
     @list.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to lists_path, status: :see_other, notice: "List was successfully destroyed." }
-      format.json { head :no_content }
-    end
   end
 
   private
@@ -60,6 +47,6 @@ class ListsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def list_params
-      params.fetch(:list, {})
+      params.require(:list).permit(:name)
     end
 end

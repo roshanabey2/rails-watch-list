@@ -21,10 +21,9 @@ class MoviesController < ApplicationController
 
   # POST /movies or /movies.json
   def create
-   #@list = List.find(params)[:list_id]
-    @movie = movie.new(list_params)
+    @movie = movie.new(movie_params)
       if @movie.save
-        redirect_to list_path(@list), status: :see_other
+        redirect_to movies_path(), status: :see_other
       else
         render :new, status: :unprocessable_entity
       end
@@ -46,10 +45,6 @@ class MoviesController < ApplicationController
   # DELETE /movies/1 or /movies/1.json
   def destroy
     @movie.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to movies_path, status: :see_other, notice: "Movie was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
@@ -61,6 +56,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.require(:review).permit(:title, :over_view, :poster_url)
+      params.require(:review).permit(:title, :overview, :poster_url)
     end
 end
