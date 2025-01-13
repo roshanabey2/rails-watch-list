@@ -31,21 +31,12 @@ class MoviesController < ApplicationController
 
   # PATCH/PUT /movies/1 or /movies/1.json
   def update
-    respond_to do |format|
-      if @movie.update(movie_params)
-        format.html { redirect_to @movie, notice: "Movie was successfully updated." }
-        format.json { render :show, status: :ok, location: @movie }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
-    end
+    list.update(list_params)
   end
 
   # DELETE /movies/1 or /movies/1.json
   def destroy
     @movie.destroy!
-    end
   end
 
   private

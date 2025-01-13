@@ -1,16 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Lists" %>
-
-<h1>Lists</h1>
-
-<div id="lists">
+<div class="list-group" id="lists">
   <% @lists.each do |list| %>
-    <%= render list %>
     <p>
-      <%= link_to "Show this list", list %>
+      <%= link_to "#{list.name}", list, class: "list-group-item list-group-item-action" %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New list", new_list_path %>
+<%= link_to new_list_path do%>
+<button  type="button" class="btn btn-primary">
+  New List <i class="fa-solid fa-plus"></i>
+</button>
+<%end%>
